@@ -1,10 +1,13 @@
-name: Ludashi 5.0 APK artifact
+name: Ludashi 5.0 signed APK release
 
+# Manual runs only: new commits and pushes do not start this workflow.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - "5.0"
+    inputs:
+      release_tag:
+        description: "Release tag (leave empty for automatic: v5.0-build.<run number>)"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -98,6 +101,8 @@ jobs:
     needs: native-tests
     runs-on: ubuntu-24.04
     timeout-minutes: 90
+    permissions:
+      contents: write # Only used to create the GitHub Release and upload the signed APK
     steps:
       - name: Checkout the test branch
         uses: actions/checkout@v4
@@ -210,12 +215,32 @@ jobs:
           print('Release identity and package verified')
           PYVERIFY
 
-      - name: Upload signed release APK artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Winlator-Ludashi-5.0-${{ github.run_number }}-r${{ github.run_attempt }}
-          path: app/build/outputs/apk/release/app-release.apk
-          if-no-files-found: error
-          retention-days: 14
-          compression-level: 0
+      - name: Publish signed APK to GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -euo pipefail
+          tag="${INPUT_RELEASE_TAG:-v5.0-build.${GITHUB_RUN_NUMBER}}"
+          safe_tag="${tag//[^A-Za-z0-9._-]/-}"
+
+          # Stage only the signed APK so nothing else can end up in the release.
+          assets="$RUNNER_TEMP/release-assets"
+          rm -rf "$assets"
+          mkdir -p "$assets"
+          apk="$assets/Winlator-Ludashi-${safe_tag}.apk"
+          mv app/build/outputs/apk/release/app-release.apk "$apk"
+
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            echo "Release $tag already exists, replacing its APK"
+            gh release upload "$tag" "$apk" --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            echo "Creating release $tag"
+            gh release create "$tag" "$apk" \
+              --repo "$GITHUB_REPOSITORY" \
+              --target "$GITHUB_SHA" \
+              --title "Winlator Ludashi 5.0 (build ${GITHUB_RUN_NUMBER})" \
+              --notes "Signed release APK built from commit ${GITHUB_SHA}. Workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          fi
+          echo "Release published: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/tag/${tag}"
           
