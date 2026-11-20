@@ -23,15 +23,27 @@ def resources(folder):
 
 
 class LocaleResourcesTest(unittest.TestCase):
-    def test_portuguese_covers_all_translatable_strings(self):
-        base, pt = resources('values'), resources('values-pt-rBR')
+    def assert_covers_all_translatable_strings(self, folder):
+        base, translated = resources('values'), resources(folder)
         for name, node in base.items():
             if node.attrib.get('translatable') != 'false':
-                self.assertIn(name, pt)
+                self.assertIn(name, translated, f'{folder}/{name}')
                 self.assertEqual(
                     collections.Counter(PRINTF.findall(''.join(node.itertext()))),
-                    collections.Counter(PRINTF.findall(''.join(pt[name].itertext()))),
-                    name)
+                    collections.Counter(PRINTF.findall(''.join(translated[name].itertext()))),
+                    f'{folder}/{name}')
+
+    def test_portuguese_covers_all_translatable_strings(self):
+        self.assert_covers_all_translatable_strings('values-pt-rBR')
+
+    def test_indonesian_covers_all_translatable_strings(self):
+        self.assert_covers_all_translatable_strings('values-in')
+
+    def test_indonesian_does_not_translate_untranslatable_strings(self):
+        base, indonesian = resources('values'), resources('values-in')
+        for name, node in base.items():
+            if node.attrib.get('translatable') == 'false':
+                self.assertNotIn(name, indonesian)
 
     def test_explicit_english_overrides_a_secondary_portuguese_locale(self):
         base, english = resources('values'), resources('values-en')
@@ -42,17 +54,19 @@ class LocaleResourcesTest(unittest.TestCase):
 
     def test_only_display_arrays_are_translated(self):
         base = {x.attrib['name']: x for x in ET.parse(RES / 'values/arrays.xml').getroot()}
-        for node in ET.parse(RES / 'values-pt-rBR/arrays.xml').getroot():
-            self.assertIn(node.attrib['name'], {
-                'binding_type_entries', 'button_options', 'touchscreenInputModesEntries',
-                'transformCapturedPointerEntries'})
-            self.assertEqual(len(base[node.attrib['name']]), len(node))
+        for folder in ('values-pt-rBR', 'values-in'):
+            for node in ET.parse(RES / folder / 'arrays.xml').getroot():
+                self.assertIn(node.attrib['name'], {
+                    'binding_type_entries', 'button_options', 'touchscreenInputModesEntries',
+                    'transformCapturedPointerEntries'}, folder)
+                self.assertEqual(len(base[node.attrib['name']]), len(node), f'{folder}/{node.attrib["name"]}')
 
     def test_declared_locales(self):
         ns = '{http://schemas.android.com/apk/res/android}'
         config = ET.parse(RES / 'xml/locales_config.xml').getroot()
-        self.assertEqual(['en', 'pt-BR'], [node.attrib[ns + 'name'] for node in config])
+        self.assertEqual(['en', 'pt-BR', 'id'], [node.attrib[ns + 'name'] for node in config])
 
 
 if __name__ == '__main__':
     unittest.main()
+        
