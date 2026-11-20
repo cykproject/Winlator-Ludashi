@@ -32,7 +32,7 @@ import com.winlator.cmod.R
 import com.winlator.cmod.ui.UiStrings
 
 object AppLanguageSettings {
-    val supportedTags: List<String> = listOf("", "en", "pt-BR")
+    val supportedTags: List<String> = listOf("", "en", "pt-BR", "id")
 
     fun select(tags: String) {
         require(tags in supportedTags)
@@ -50,7 +50,8 @@ fun AppLanguagePreference() {
     val labels = listOf(
         stringResource(R.string.app_language_system),
         stringResource(R.string.app_language_english),
-        stringResource(R.string.app_language_pt_br)
+        stringResource(R.string.app_language_pt_br),
+        stringResource(R.string.app_language_indonesian)
     )
     var expanded by remember { mutableStateOf(false) }
     Box {
