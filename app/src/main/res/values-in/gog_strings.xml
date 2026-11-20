@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gog_library_subtitle">Pustaka GOG Anda di Ludashi</string>
+    <string name="gog_sign_in">Masuk ke GOG</string>
+    <string name="gog_sign_out">Keluar dari GOG</string>
+    <string name="gog_games">Game</string>
+    <string name="gog_installed">Terpasang</string>
+    <string name="gog_not_installed">Belum terpasang</string>
+    <string name="gog_search">Cari game</string>
+    <string name="gog_empty_library">Tidak ada game untuk ditampilkan. Masuk atau segarkan pustaka Anda.</string>
+    <string name="gog_no_downloads">Tidak ada unduhan GOG aktif</string>
+    <string name="gog_preparing">Menyiapkan unduhan…</string>
+    <string name="gog_downloading">Mengunduh…</string>
+    <string name="gog_extracting">Memasang…</string>
+    <string name="gog_no_windows_installer">Tidak ada installer offline Windows yang tersedia untuk game ini.</string>
+    <string name="gog_installer">Bahasa dan versi installer</string>
+    <string name="gog_choose_container">Pilih container</string>
+    <string name="gog_choose_executable">Pilih executable game</string>
+    <string name="gog_install_help">Mengunduh installer offline Windows dan memasang game di container yang dipilih. Beberapa game memerlukan komponen tambahan atau konfigurasi manual.</string>
+    <string name="gog_shortcut_settings">Pengaturan pintasan</string>
+    <string name="gog_toggle_favorite">Alihkan favorit</string>
+    <string name="gog_download_install">Unduh dan pasang</string>
+    <string name="gog_play">Mainkan</string>
+    <string name="gog_uninstall_help">Hapus file game yang terpasang dan pintasannya? File di dalam folder game, termasuk data simpan di dalamnya, akan dihapus.</string>
+    <string name="gog_all_stores">Semua toko</string>
+    <string name="gog_local_games">Game lokal</string>
+    <string name="gog_manage_stores">Kelola toko</string>
+    <string name="gog_store_help">Masuk, jelajahi pustaka Anda, dan pasang game Windows bebas DRM.</string>
+    <string name="gog_integration">Integrasi GOG</string>
+    <string name="gog_integration_disabled">Integrasi dinonaktifkan</string>
+    <string name="gog_store_settings">Pengaturan toko</string>
+    <string name="gog_settings_title">Pengaturan GOG</string>
+    <string name="gog_steam_settings_title">Pengaturan Steam</string>
+</resources>

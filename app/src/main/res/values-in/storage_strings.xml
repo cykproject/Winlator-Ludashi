@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="storage_title">Penyimpanan</string>
+    <string name="storage_summary">Game, komponen, container, dan file sementara</string>
+    <string name="storage_busy">Tutup container dan jeda unduhan sebelum mengelola penyimpanan.</string>
+    <string name="storage_refresh">Analisis ulang</string>
+    <string name="storage_calculating">Menghitung penggunaan penyimpanan…</string>
+    <string name="storage_used">Terpakai</string>
+    <string name="storage_managed">File yang dikelola Ludashi, termasuk game terdaftar di penyimpanan eksternal.</string>
+    <string name="storage_available">%1$s tersisa di penyimpanan internal</string>
+    <string name="storage_unreadable">Beberapa lokasi tidak dapat dibaca. File di lokasi tersebut tidak termasuk dalam total ini.</string>
+    <string name="storage_clear_cache">Hapus cache · %1$s</string>
+    <string name="storage_manage_components">Kelola komponen</string>
+    <string name="storage_manage_containers">Kelola container</string>
+    <string name="storage_app_details">Pengaturan aplikasi Android</string>
+    <string name="storage_empty">Tidak ada file dalam kategori ini.</string>
+    <string name="storage_remove_title">Hapus file yang dipilih?</string>
+    <string name="storage_games">Game</string>
+    <string name="storage_components">Komponen</string>
+    <string name="storage_containers">Container</string>
+    <string name="storage_downloads">Unduhan dan installer</string>
+    <string name="storage_cache">Cache</string>
+    <string name="storage_backups">Cadangan data simpan</string>
+    <string name="storage_logs">Log</string>
+    <string name="storage_system">File aplikasi dan sistem</string>
+    <string name="storage_other">Data aplikasi lainnya</string>
+    <string name="storage_games_help">Instalasi Steam, GOG, dan itch.io yang terdaftar. Mencopot akan menghapus instalasi game yang dipilih.</string>
+    <string name="storage_cache_help">Menghapus file sementara dan karya seni yang di-cache. Game, komponen, dan cadangan data simpan tetap dipertahankan. File cache dapat diunduh atau dibangun ulang nanti.</string>
+    <string name="storage_containers_help">Prefix Wine dan instalasi lokal di dalam container. Game toko yang ditampilkan di Game dihitung secara terpisah.</string>
+    <string name="storage_system_help">Ludashi, pustaka native-nya, dan runtime dasar. File ini diperlukan agar aplikasi dapat berjalan.</string>
+    <string name="storage_other_help">Informasi akun, pengaturan, metadata pustaka, dan file aplikasi persisten lainnya.</string>
+    <string name="storage_items_help">Tinjau file dan lokasinya sebelum menghapusnya.</string>
+    <string name="ludashi_download_channel">Unduhan Ludashi</string>
+    <string name="ludashi_download_channel_help">Progres unduhan untuk Steam, GOG, dan itch.io.</string>
+    <string name="ludashi_downloads">Unduhan Ludashi</string>
+    <string name="ludashi_steam_session">Koneksi Steam aktif</string>
+</resources>
